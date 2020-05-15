@@ -48,19 +48,32 @@
   font-weight: 500px;
   font-family: "Poppins", sans-serif;
   color: $primary;
+
+  &:hover {
+    color: $primary;
+    text-decoration: none;
+  }
 }
 
 header {
   border-bottom: 1px solid $gray-200;
   width: 100%;
   position: relative;
+  margin-bottom: 50px;
 }
 
 .navbar {
   height: 80px;
 
-  .navbar-nav {
+  ul.navbar-nav {
     li.nav-item {
+      &.active {
+        a.nav-link {
+          color: $primary;
+        }
+      }
+
+
       a {
         &.nav-link {
           color: $gray-900;
