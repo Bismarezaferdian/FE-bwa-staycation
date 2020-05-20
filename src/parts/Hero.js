@@ -97,7 +97,6 @@ export default function Hero(props) {
               style={{ margin: "0 -15px -15px 0" }}
             />
           </div>
-          );
         </div>
       </div>
     </section>
