@@ -25,7 +25,9 @@ test("should render <a> tag", () => {
 test("should Link ", () => {
   const { container } = render(
     <Router>
-      <Button type="link"> </Button>
+      <Button href="" type="link">
+        {" "}
+      </Button>
     </Router>
   );
 

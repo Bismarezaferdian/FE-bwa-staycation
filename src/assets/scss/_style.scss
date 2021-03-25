@@ -5,6 +5,8 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+@import "_colorVariables";
 @import "functions";
 @import "variables";
 @import "mixins";
@@ -74,7 +76,6 @@ header {
         }
       }
 
-
       a {
         &.nav-link {
           color: $gray-900;
@@ -142,7 +143,7 @@ section {
     }
 
     span {
-      font-size: .875rem;
+      font-size: 0.875rem;
     }
   }
 
@@ -159,9 +160,9 @@ section {
       left: 0;
       bottom: 0;
       transform: scale(1.1);
-      transition: .5s transform ease-in-out;
+      transition: 0.5s transform ease-in-out;
       z-index: 2;
-      @include gradient-y(rgba($black, 0), rgba($black, .51), 0%, 100%)
+      @include gradient-y(rgba($black, 0), rgba($black, 0.51), 0%, 100%);
     }
 
     .img-wrapper {
@@ -173,7 +174,7 @@ section {
       right: 0;
       bottom: 0;
       transform: scale(1.1);
-      transition: .25s transform ease-in-out;
+      transition: 0.25s transform ease-in-out;
     }
 
     .meta-wrapper {
@@ -185,7 +186,7 @@ section {
       bottom: 0;
       width: 100%;
       transform: translate(0);
-      transition: .3s;
+      transition: 0.3s;
       transform: ease-in-out;
       display: flex;
       justify-content: flex-end;
@@ -203,8 +204,41 @@ section {
 
       .img-wrapper {
         transform: scale(1);
-
       }
     }
+  }
+}
+
+.testimonial-hero,
+.testimonial-hero img {
+  width: 365px;
+  height: 500px;
+}
+
+footer {
+  border-top: 1px solid $gray-200;
+  padding-top: 50px;
+
+  .list-group-item {
+    padding-top: 0.3125rem 0;
+
+    a,
+    span {
+      color: $gray-500;
+      font-weight: 300;
+    }
+
+    a {
+      @include hover-focus {
+        color: $gray-800;
+      }
+    }
+  }
+
+  .copyrights {
+    margin-top: 80px;
+    font-weight: 300;
+    color: $gray-500;
+    margin-bottom: 50px;
   }
 }
