@@ -1,87 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import propTypes from "prop-types";
+
+import { DateRange } from "react-date-range";
+
 import "./index.scss";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
-export default function Number(props) {
-  const { value, placeholder, name, min, max, prefix, suffix } = prop;
-  const [InputValue, setInputValue] = useState(`${value}${prefix}${suffix}`);
+import formatDate from "utiltis/formatDate";
+import iconCalendar from "assets/image/icon/icon-calendar.svg";
 
-  const onChange = (e) => {
-    let value = String(e.target.value);
-    if (prefix) value = value.replace(prefix);
-    if (suffix) value = value.replace(suffix);
+export default function Date(props) {
+  const { value, placeholder, name } = props;
+  const [isShowed, setIsShowed] = useState(false);
 
-    const patternNumeric = new RegExp("[0-9]*");
-    const isNumeric = patternNumeric.test(value);
+  const datePickerChange = (value) => {
+    const target = {
+      target: {
+        value: value.selection,
+        name: name,
+      },
+    };
+    // cons.log(target);
+    props.onChange(target);
+  };
 
-    if (isNumeric && +value <= max && +value >= min) {
-      props.onChange({
-        target: {
-          name: name,
-          value: +value,
-        },
-      });
-      setInputValue(`${value}${prefix}${suffix}`);
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutSide);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutSide);
+    };
+  });
+
+  const refDate = useRef(null);
+  const handleClickOutSide = (event) => {
+    if (refDate && !refDate.current.contains(event.target)) {
+      setIsShowed(false);
     }
   };
 
-  const minus = () => {
-    value > min &&
-      onChange({
-        target: {
-          name: name,
-          value: +value - 1,
-        },
-      });
+  const check = (focus) => {
+    focus.indexOf(1) < 0 && setIsShowed(false);
   };
 
-  const plus = () => {
-    value < min &&
-      onChange({
-        target: {
-          name: name,
-          value: +value + 1,
-        },
-      });
-  };
+  const displayDate = `${value.startDate ? formatDate(value.startDate) : ""}${
+    value.endDate ? " - " + formatDate(value.endDate) : ""
+  }`;
 
   return (
-    <div className={["input-number mb-3", props.outerClassName].join(" ")}>
+    <div
+      ref={refDate}
+      className={["input-date mb-3", props.outerClassName].join(" ")}
+    >
       <div className="input-group">
-        <div className=" input-group-prepend">
-          <span className=" input-group-text minus " onClick={minus}>
-            -
+        <div className="input-group-prepend bg-gray-900">
+          <span className="input-group-text">
+            <img src={iconCalendar} alt="icon calendar" />
           </span>
         </div>
         <input
-          min={min}
-          max={max}
-          name={name}
-          pattern="[0-9]*"
+          readOnly
+          type="text"
           className="form-control"
-          placeholder={placeholder ? placeholder : "0"}
-          value={String(InputValue)}
-          onChange={onChange}
+          value={displayDate}
+          placeholder={placeholder}
+          onClick={() => setIsShowed(!isShowed)}
         />
-        <div className="input-group-append">
-          <span className="input-group-text plus" onClick={plus}>
-            +
-          </span>
-        </div>
+
+        {isShowed && (
+          <div className="date-range-wrapper">
+            <DateRange
+              editableDateInputs={true}
+              onChange={datePickerChange}
+              moveRangeOnFirstSelection={false}
+              onRangeFocusChange={check}
+              ranges={[value]}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-Number.defaultProps = {
-  min: 1,
-  max: 1,
-  prefix: "",
-  suffix: "",
-};
-
-Number.propTypes = {
-  value: propTypes.oneOf([propTypes.string, propTypes.number]),
+Date.propTypes = {
+  value: propTypes.object,
   onChange: propTypes.func,
   placeholder: propTypes.string,
   outerClassName: propTypes.string,
