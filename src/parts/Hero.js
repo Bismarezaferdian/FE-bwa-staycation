@@ -49,12 +49,12 @@ export default function Hero(props) {
                 width="36"
                 height="36"
                 src={Bag}
-                // alt={`${props.data.travelers} travelers`}
+                // alt={`${props.data.traveler} traveler`}
               />
               <h6 mt-3="true">
-                {FormatNumber(props.data.travelers)}{" "}
+                {FormatNumber(props.data.traveler)}{" "}
                 <span className="text-gray-500 font-weight-light">
-                  Travelers
+                  traveler
                 </span>
               </h6>
             </div>
