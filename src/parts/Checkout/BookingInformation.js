@@ -1,32 +1,28 @@
 import React from "react";
-import { Fade } from "react-reveal";
+import Fade from "react-reveal/Fade";
 
-import InputText from "elements/Form/InputText";
+import { InputText } from "elements/Form";
 
-const BookingInformation = (props) => {
+export default function BookingInformation(props) {
   const { data, ItemDetails, checkout } = props;
   return (
     <Fade>
       <div className="container" style={{ marginBottom: 30 }}>
         <div className="row justify-content-center align-items-center">
-          <div
-            className="col-5 border-right py-5 "
-            style={{ paddingRight: 80 }}
-          >
+          <div className="col-5 border-right py-5" style={{ paddingRight: 80 }}>
             <Fade delay={300}>
               <div className="card">
                 <figure className="img-wrapper" style={{ height: 270 }}>
                   <img
-                    src={ItemDetails.imageUrls[0].url}
-                    alt={ItemDetails.name}
                     className="img-cover"
+                    src={`${process.env.REACT_APP_HOST}/${ItemDetails.imageId[0].imageUrl}`}
+                    alt={ItemDetails.title}
                   />
                 </figure>
-
                 <div className="row align-items-center">
                   <div className="col">
                     <div className="meta-wrapper">
-                      <h5>{ItemDetails.name}</h5>
+                      <h5>{ItemDetails.title}</h5>
                       <span className="text-gray-500">
                         {ItemDetails.city}, {ItemDetails.country}
                       </span>
@@ -35,7 +31,7 @@ const BookingInformation = (props) => {
                   <div className="col-auto">
                     <span>
                       ${+checkout.duration * ItemDetails.price} USD
-                      <span className="text-gray-500">per</span>
+                      <span className="text-gray-500"> per </span>
                       {checkout.duration} {ItemDetails.unit}
                       {+checkout.duration > 1 ? "s" : ""}
                     </span>
@@ -46,7 +42,7 @@ const BookingInformation = (props) => {
           </div>
           <div className="col-5 py-5" style={{ paddingLeft: 80 }}>
             <Fade delay={600}>
-              <label htmlFor="firsName"> First Name</label>
+              <label htmlFor="firstName">First Name</label>
               <InputText
                 id="firstName"
                 name="firstName"
@@ -54,7 +50,7 @@ const BookingInformation = (props) => {
                 onChange={props.onChange}
               />
 
-              <label htmlFor="lastName"> Last Name</label>
+              <label htmlFor="lastName">Last Name</label>
               <InputText
                 id="lastName"
                 name="lastName"
@@ -62,9 +58,8 @@ const BookingInformation = (props) => {
                 onChange={props.onChange}
               />
 
-              <label htmlFor="email"> Email Address</label>
+              <label htmlFor="email">Email Address</label>
               <InputText
-                className="text-gray-100"
                 id="email"
                 name="email"
                 type="email"
@@ -72,7 +67,7 @@ const BookingInformation = (props) => {
                 onChange={props.onChange}
               />
 
-              <label htmlFor="phone"> Phone Number</label>
+              <label htmlFor="phone">Phone Number</label>
               <InputText
                 id="phone"
                 name="phone"
@@ -86,6 +81,4 @@ const BookingInformation = (props) => {
       </div>
     </Fade>
   );
-};
-
-export default BookingInformation;
+}

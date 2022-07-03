@@ -1,5 +1,5 @@
 import React from "react";
-import { Fade } from "react-reveal";
+// import { Fade } from "react-reveal";
 
 import ImgHero from "assets/image/img-hero.jpg";
 import Frame from "assets/image/img-hero-frame.jpg";
@@ -49,7 +49,7 @@ export default function Hero(props) {
                 width="36"
                 height="36"
                 src={Bag}
-                // alt={`${props.data.traveler} traveler`}
+                alt={`${props.data.traveler} traveler`}
               />
               <h6 mt-3="true">
                 {FormatNumber(props.data.traveler)}{" "}

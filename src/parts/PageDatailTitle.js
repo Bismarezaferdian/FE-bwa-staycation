@@ -12,7 +12,7 @@ function PageDatailTitle({ data, breadcrumb }) {
         <div className="col text-center ">
           <h1 className="h2">{data.name}</h1>
           <span>
-            {data.categories.city},{data.categories.country}
+            {data.categoryId.city},{data.categoryId.country}
           </span>
         </div>
         <div className="col"></div>

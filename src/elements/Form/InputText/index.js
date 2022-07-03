@@ -33,7 +33,7 @@ const Text = (props) => {
 
     if (type === "email ") {
       if (!pattern.test(event.target.value)) setHasError(errorResponse);
-      else setHasError = "";
+      else setHasError( null);
     }
 
     if (type === "tel") {

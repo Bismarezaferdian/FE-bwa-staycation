@@ -27,7 +27,6 @@ class LandingPage extends Component {
 
   render() {
     const { page } = this.props;
-    console.log(page);
 
     if (!page.hasOwnProperty("landingPage")) return null;
 
@@ -40,7 +39,7 @@ class LandingPage extends Component {
           data={page.landingPage.mostPicked}
         />
         <Categories data={page.landingPage.category} />
-        {/* <Testimoni data={page.landingPage.testimonial} /> */}
+        <Testimoni data={page.landingPage.testimonial} />
         <Footer />
       </>
     );

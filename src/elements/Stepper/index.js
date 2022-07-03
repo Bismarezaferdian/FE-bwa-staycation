@@ -11,7 +11,6 @@ export default function Stepper(props) {
   );
   const totalStep = stepsKeys.length;
   const indexStep = stepsKeys.indexOf(CurrentStep);
-  console.log(totalStep);
 
   function prevStep() {
     if (+indexStep > 0) setCurrentStep(stepsKeys[indexStep - 1]);

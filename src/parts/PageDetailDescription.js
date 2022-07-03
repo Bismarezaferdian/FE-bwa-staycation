@@ -7,14 +7,15 @@ function PageDetailDescription({ data }) {
       <h4>About the place</h4>
       {ReactHtmlParser(data.description)}
       <div className="row" style={{ marginTop: 30 }}>
-        {data.features.map((item, index) => (
+        {data.featureId.map((item, index) => (
           <div
             key={`feature-${index}`}
             className="col-3"
             style={{ marginBottom: 20 }}
           >
             <img
-              src={item.imageUrl}
+              src={item.imageUrl? `${process.env.REACT_APP_HOST}/${item.imageUrl}`
+              : ""}
               alt={item.name}
               width="38"
               className="d-block mb-2"
