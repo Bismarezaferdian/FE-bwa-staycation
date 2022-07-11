@@ -18,9 +18,16 @@ class LandingPage extends Component {
     window.title = " staycation | home ";
     window.scrollTo(0, 0);
 
+    // if (!this.props.page.landingPage)
+    //   this.props.fetchPage(
+    //     `http://admin-stacation.herokuapp.com/api/v1/member/landing-page`,
+    //     "landingPage"
+    //   );
+      
+      //url disimpan di folder config/axios
     if (!this.props.page.landingPage)
       this.props.fetchPage(
-        `http://admin-stacation.herokuapp.com/api/v1/member/landing-page`,
+        `/landing-page`,
         "landingPage"
       );
   }

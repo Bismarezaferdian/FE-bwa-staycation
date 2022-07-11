@@ -1,21 +1,21 @@
 import React, { Component } from "react";
-import { Fade } from "react-reveal";
+import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
 
 import Header from "parts/Header";
-import Button from "elements/Button/";
-//penulisan stepper file utama , Numbering, meta,maincontent,contoller childern folder
-import Stepper from "elements/Stepper";
-import Numbering from "elements/Stepper/Numbering";
-import MainContent from "elements/Stepper/MainContent";
-import Meta from "elements/Stepper/Meta";
-import Controller from "elements/Stepper/Controller";
+import Button from "elements/Button";
+import Stepper, {
+  Numbering,
+  Meta,
+  MainContent,
+  Controller,
+} from "elements/Stepper";
+
 import BookingInformation from "parts/Checkout/BookingInformation";
 import Payment from "parts/Checkout/Payment";
 import Completed from "parts/Checkout/Completed";
 
-// import ItemDetails from "json/itemDetails.json";
-// import {checkout }from "store/action/checkout";
+import { submitBooking } from "store/actions/checkout";
 
 class Checkout extends Component {
   state = {
@@ -41,11 +41,36 @@ class Checkout extends Component {
 
   componentDidMount() {
     window.scroll(0, 0);
+    document.title = "Staycation | Checkout";
   }
+
+  _Submit = (nextStep) => {
+    const { data } = this.state;
+    const { checkout } = this.props;
+
+    const payload = new FormData();
+    payload.append("firstName", data.firstName);
+    payload.append("lastName", data.lastName);
+    payload.append("email", data.email);
+    payload.append("phoneNumber", data.phone);
+    payload.append("idItem", checkout._id);
+    payload.append("duration", checkout.duration);
+    payload.append("bookingStartDate", checkout.date.startDate);
+    payload.append("bookingEndDate", checkout.date.endDate);
+    payload.append("accountHolder", data.bankHolder);
+    payload.append("bankFrom", data.bankName);
+    payload.append("image", data.proofPayment[0]);
+    // payload.append("bankId", checkout.bankId);
+
+    this.props.submitBooking(payload).then(() => {
+      nextStep();
+    });
+  };
 
   render() {
     const { data } = this.state;
-    const { checkout, page} = this.props;
+    const { checkout, page } = this.props;
+    console.log(page, data);
     if (!checkout)
       return (
         <div className="container">
@@ -89,8 +114,8 @@ class Checkout extends Component {
         content: (
           <Payment
             data={data}
-            ItemDetails={page}
-            checkout={page[checkout._id]}
+            ItemDetails={page[checkout._id]}
+            checkout={checkout}
             onChange={this.onChange}
           />
         ),
@@ -106,7 +131,7 @@ class Checkout extends Component {
       <>
         <Header isCentered />
 
-        <Stepper steps={steps} initialStep="bookingInformation">
+        <Stepper steps={steps} initialStep="payment">
           {(prevStep, nextStep, CurrentStep, steps) => (
             <>
               <Numbering
@@ -162,7 +187,7 @@ class Checkout extends Component {
                           isBlock
                           isPrimary
                           hasShadow
-                          onClick={nextStep}
+                          onClick={() => this._Submit(nextStep)}
                         >
                           Continue to Book
                         </Button>
@@ -204,7 +229,7 @@ class Checkout extends Component {
 
 const mapStateToProps = (state) => ({
   checkout: state.checkout,
-  page: state.page
+  page: state.page,
 });
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps, { submitBooking })(Checkout);
