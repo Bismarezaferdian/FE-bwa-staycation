@@ -15,29 +15,30 @@ import { fetchPage } from "store/actions/page";
 import Activities from "parts/Activities";
 
 class PageDetail extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.refMosPicked= React.createRef()}
+    this.refMosPicked = React.createRef();
+  }
 
   componentDidMount() {
     window.title = "Detail Page";
     window.scrollTo(0, 0);
-    if(!this.props.page[this.props.match.params.id])
-    this.props.fetchPage(
-      `/detail-page/${this.props.match.params.id}`,this.props.match.params.id
-    );
-    
+    if (!this.props.page[this.props.match.params.id])
+      this.props.fetchPage(
+        `/detail-page/${this.props.match.params.id}`,
+        this.props.match.params.id
+      );
   }
 
   render() {
-    const {page,match } = this.props
-    // console.log(this.props);
-    if(!page[match.params.id])return null
+    const { page, match } = this.props;
+
+    if (!page[match.params.id]) return null;
     const breadcrumb = [
       { pageTitle: "home", pageHref: "/" },
       { pageTitle: "House Detail", pageHref: "" },
     ];
-    return (  
+    return (
       <>
         {/* <Header /> */}
         <Header {...this.props} />
@@ -70,7 +71,9 @@ class PageDetail extends Component {
   }
 }
 
-const mapStateToProps= (state)=>({
-  page : state.page
-})
-export default connect(mapStateToProps, { checkoutBooking,fetchPage })(PageDetail);
+const mapStateToProps = (state) => ({
+  page: state.page,
+});
+export default connect(mapStateToProps, { checkoutBooking, fetchPage })(
+  PageDetail
+);

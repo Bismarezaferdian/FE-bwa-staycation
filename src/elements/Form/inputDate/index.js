@@ -10,7 +10,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import formatDate from "utiltis/formatDate";
 import iconCalendar from "assets/image/icon/icon-calendar.svg";
 
-export default function Date(props) {
+export default function InputDate(props) {
   const { value, placeholder, name } = props;
   const [isShowed, setIsShowed] = useState(false);
 
@@ -21,20 +21,19 @@ export default function Date(props) {
         name: name,
       },
     };
-    // cons.log(target);
     props.onChange(target);
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutSide);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutSide);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   });
 
   const refDate = useRef(null);
-  const handleClickOutSide = (event) => {
+  const handleClickOutside = (event) => {
     if (refDate && !refDate.current.contains(event.target)) {
       setIsShowed(false);
     }
