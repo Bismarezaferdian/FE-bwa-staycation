@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import propTypes from "prop-types";
 import "./index.scss";
 
-export default function Number(props) {
+export default function InputNumber(props) {
   //props kiriman dari bookingForm
-  const { value, placeholder, name, min, max, prefix, suffix, } =
-    props;
+  const { value, placeholder, name, min, max, prefix, suffix } = props;
 
-    const [InputValue, setInputValue] = useState(`${prefix}${value}${suffix}`)
+  const [InputValue, setInputValue] = useState(`${prefix}${value}${suffix}`);
 
   const onChange = (e) => {
     let value = String(e.target.value);
@@ -75,9 +74,6 @@ export default function Number(props) {
       </div>
     </div>
   );
-
-
-  
 }
 Number.defaultProps = {
   min: 1,
@@ -86,10 +82,9 @@ Number.defaultProps = {
   suffix: "",
 };
 Number.propTypes = {
-    value: propTypes.oneOfType([propTypes.string, propTypes.number]),
-    onChange: propTypes.func,
-    // isSuffixPlurel: propTypes.bool,
-    placeholder: propTypes.string,
-    outerClassName: propTypes.string,
-  };
-  
+  value: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  onChange: propTypes.func,
+  // isSuffixPlurel: propTypes.bool,
+  placeholder: propTypes.string,
+  outerClassName: propTypes.string,
+};

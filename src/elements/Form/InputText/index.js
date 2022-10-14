@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import "./index.scss";
 
-const Text = (props) => {
+const InputText = (props) => {
   const {
     value,
     type,
@@ -33,7 +33,7 @@ const Text = (props) => {
 
     if (type === "email ") {
       if (!pattern.test(event.target.value)) setHasError(errorResponse);
-      else setHasError( null);
+      else setHasError(null);
     }
 
     if (type === "tel") {
@@ -72,7 +72,7 @@ const Text = (props) => {
   );
 };
 
-export default Text;
+export default InputText;
 
 Text.defaultProps = {
   type: "text",

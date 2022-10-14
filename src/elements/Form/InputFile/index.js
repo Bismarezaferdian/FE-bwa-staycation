@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import "./index.scss";
 
-export default function File(props) {
+export default function InputFile(props) {
   const [FileName, setFileName] = useState("");
   const {
     placeholder,
