@@ -1,5 +1,5 @@
-import InputDate from "elements/Form/InputDate";
 import React, { useState } from "react";
+import { InputDate } from "elements/Form";
 
 const Show = () => {
   const [state, setState] = useState({

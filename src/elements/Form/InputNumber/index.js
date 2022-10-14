@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import propTypes from "prop-types";
 import "./index.scss";
 
-export default function InputNumber(props) {
+export default function Number(props) {
   //props kiriman dari bookingForm
   const { value, placeholder, name, min, max, prefix, suffix } = props;
 

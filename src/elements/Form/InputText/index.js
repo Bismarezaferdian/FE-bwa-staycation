@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import "./index.scss";
 
-const InputText = (props) => {
+const Text = (props) => {
   const {
     value,
     type,
@@ -72,7 +72,7 @@ const InputText = (props) => {
   );
 };
 
-export default InputText;
+export default Text;
 
 Text.defaultProps = {
   type: "text",

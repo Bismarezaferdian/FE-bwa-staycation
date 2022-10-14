@@ -4,6 +4,8 @@ import LandingPage from "pages/LandingPage";
 import PageDetail from "pages/PageDetail";
 // import Example from "pages/Example";
 import Checkout from "pages/Checkout";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
 import "./assets/scss/_style.scss";
 
